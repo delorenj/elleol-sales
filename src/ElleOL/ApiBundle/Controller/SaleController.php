@@ -5,16 +5,19 @@ namespace ElleOL\ApiBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-
+use Symfony\Component\HttpFoundation\Response;
+use ElleOL\ApiBundle\Entity\Sale;
 
 class SaleController extends Controller
 {
     /**
-     * @Route("/new")
+     * @Route("/update")
      * @Template()
      */
-    public function newAction()
+    public function updateAction()
     {
+        $resp = $this->get('etsy_helper')->updateSalesCount();
+        return new Response(json_encode($resp));
     }
 
     /**
@@ -23,15 +26,15 @@ class SaleController extends Controller
      */
     public function indexAction()
     {
-        $auth = require("/etc/apache2/conf.d/etsy-oauth.php");
-
-        $client = new \Etsy\EtsyClient($auth['consumer_key'], $auth['consumer_secret']);
-        $client->authorize($auth['access_token'], $auth['access_token_secret']);
-
-        $api = new \Etsy\EtsyApi($client);
-
-        var_dump(($api->getUser(array('params' => array('user_id' => '__SELF__')))));
-        die();
+        $numSales = $this->get('doctrine')->getRepository("EOLApiBundle:Sale")->getLatestCount();
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 0,
+            CURLOPT_URL => 'https://agent.electricimp.com/7FaKnIJOtsHD?led=1&timer=5'
+        ));
+        curl_exec($curl);
+        curl_close($curl);
+        return new Response(json_encode(array("numSales" => $numSales)));
     }
 
     /**

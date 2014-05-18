@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class SaleRepository extends EntityRepository
 {
+	public function getLatestCount() {
+		return $this->_em->createQueryBuilder()
+			->select("s.saleCount")
+			->from("EOLApiBundle:Sale", "s")
+			->setMaxResults(1)
+			->orderBy("s.createdAt", "desc")
+			->getQuery()
+			->getSingleScalarResult();
+	}
 }

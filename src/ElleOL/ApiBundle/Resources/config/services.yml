@@ -1,0 +1,8 @@
+services:
+    etsy_helper:
+        class: ElleOL\ApiBundle\Services\EtsyHelper
+        arguments:
+            container: "@service_container"
+            em: "@doctrine.orm.entity_manager"
+            logger: "@logger"
+        lazy: true

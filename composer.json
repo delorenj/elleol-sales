@@ -20,7 +20,8 @@
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "gedmo/doctrine-extensions": "dev-master",
-        "inakiabt/etsy-php": "dev-master"
+        "inakiabt/etsy-php": "dev-master",
+        "hellogerard/jobby": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

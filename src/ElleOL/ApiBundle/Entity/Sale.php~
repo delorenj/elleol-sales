@@ -98,27 +98,4 @@ class Sale
     {
         return $this->createdAt;
     }
-
-    /**
-     * Set saleCount
-     *
-     * @param integer $saleCount
-     * @return Sale
-     */
-    public function setSaleCount($saleCount)
-    {
-        $this->saleCount = $saleCount;
-
-        return $this;
-    }
-
-    /**
-     * Get saleCount
-     *
-     * @return integer 
-     */
-    public function getSaleCount()
-    {
-        return $this->saleCount;
-    }
 }
