@@ -1,0 +1,5 @@
+eol_api:
+    resource: "@EOLApiBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
