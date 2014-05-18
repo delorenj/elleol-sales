@@ -23,14 +23,7 @@ class SaleController extends Controller
      */
     public function indexAction()
     {
-        $auth = array (
-          'consumer_key' => 'wef33dv7danu3ba1m0xnwgl6',
-          'consumer_secret' => '3nne1t9fe6',
-          'token_secret' => '8f861f9a80f5a3798ee7c517f79300',
-          'token' => 'b6179c49ea',
-          'access_token' => 'f2845473d8f80cbf94c8299e84cf74',
-          'access_token_secret' => '7b75995db6',
-        );
+        $auth = require("/etc/apache2/conf.d/etsy-oauth.php");
 
         $client = new \Etsy\EtsyClient($auth['consumer_key'], $auth['consumer_secret']);
         $client->authorize($auth['access_token'], $auth['access_token_secret']);
